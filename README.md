@@ -8,6 +8,8 @@
 Welcome!
 Created by Dee, 2025.01.24
 
+this is the frontend
+
 This is an App with multifunktions
 	-End to End encrypted communication
 	-Opensource and supports continuous integration
