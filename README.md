@@ -1,4 +1,10 @@
 # chat-app
+>author: derge
+>
+>author: deege
+>
+>牛逼还是谁牛家人们？
+
 Welcome!
 Created by Dee, 2025.01.24
 
