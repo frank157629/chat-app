@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect User</title>
+  <!-- 页面标题，显示在浏览器标签栏 -->
+</head>
+<body>
+  <!-- 页面内容开始 -->
+  <h1>Connect User to Chat</h1>
+  <!-- 页面主标题 -->
+  
+  <!-- 表单用于提交用户 ID -->
+  <form id="connectForm">
+    <label for="user_id">User ID:</label>
+    <!-- 输入框用于用户 ID -->
+    <input type="text" id="user_id" name="user_id" required>
+    <!-- 提交按钮 -->
+    <button type="submit">Connect</button>
+  </form>
+
+  <!-- 响应区域，用于显示服务器返回的结果 -->
+  <p id="response"></p>
+
+  <!-- JavaScript 用于处理表单提交和与服务器的交互 -->
+  <script>
+    // 获取表单元素
+    const form = document.getElementById('connectForm');
+    
+    // 添加表单提交事件监听器
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // 阻止默认提交行为（页面刷新）
+      
+      // 获取用户输入的 ID
+      const userId = document.getElementById('user_id').value;
+
+      try {
+        // 向 Flask 后端发送 POST 请求
+        const response = await fetch('http://127.0.0.1:5000/connect', {
+          method: 'POST', // HTTP 方法
+          headers: {
+            'Content-Type': 'application/json' // 告诉服务器这是 JSON 数据
+          },
+          body: JSON.stringify({ user_id: userId }) // 将用户 ID 转换为 JSON 格式
+        });
+
+        // 解析响应数据
+        const result = await response.json();
+        // 将响应结果显示在页面上
+        document.getElementById('response').textContent = JSON.stringify(result);
+      } catch (error) {
+        // 如果请求失败，显示错误信息
+        document.getElementById('response').textContent = 'Error: ' + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
